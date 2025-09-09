@@ -1,0 +1,160 @@
+.activity-section {
+    max-width: 1300px;
+    padding-bottom: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 991px) {
+    .activity-section {
+        padding-bottom: 82px;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .activity-section {
+        padding-bottom: 42px;
+    }
+}
+
+.activity-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centers the cards horizontally */
+    align-items: center; /* Centers the cards vertically */
+    gap: 20px; }
+
+.activity-inner.row {
+    text-decoration: none;
+    margin-left: -9px;
+    margin-right: -9px;
+}
+
+.activity-inner [class*=col-] {
+    padding-left: 9px;
+    padding-right: 9px;
+}
+
+.activity-inner .activity-item {
+    text-decoration: none;
+    border: 1px solid #D9D9D9;
+    text-align: center;
+    padding: 15px;
+}
+
+.activity-inner .activity-item .activity-icon {
+    margin-bottom: 15px;
+}
+
+.activity-inner .activity-item p {
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 991px) {
+    .activity-inner .activity-item {
+        margin-bottom: 18px;
+    }
+}
+
+.activity-bg-image {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    padding-top: 100px;
+    margin-bottom: 100px;
+    position: relative;
+}
+
+.activity-bg-image:before {
+    content: "";
+    background-color: #151515;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.75;
+}
+
+.activity-bg-image .activity-inner.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.activity-bg-image .activity-inner [class*=col-] {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.activity-bg-image .activity-item {
+    border-width: 0 1px 0 0;
+    border-color: rgba(255, 255, 255, 0.28);
+    margin-bottom: 0;
+}
+
+.activity-bg-image .activity-content {
+    color: black;
+    text-decoration: none;
+
+}
+.activity-title:hover {
+    color: blue;
+    text-align: center;
+}
+
+.activity-bg-image [class*=col-]:last-child .activity-item {
+    border-right: none;
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+    .activity-bg-image .activity-item {
+        border-width: 0 1px 1px 0;
+    }
+
+    .activity-bg-image [class*=col-]:nth-child(3)~[class*=col-] .activity-item {
+        border-bottom: none;
+    }
+
+    .activity-bg-image [class*=col-]:nth-child(3) .activity-item {
+        border-right: none;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .activity-bg-image {
+        padding-top: 82px;
+        margin-bottom: 82px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .activity-bg-image .activity-item {
+        border-width: 0 1px 1px 0;
+    }
+
+    .activity-bg-image [class*=col-]:nth-child(4)~[class*=col-] .activity-item {
+        border-bottom: none;
+    }
+
+    .activity-bg-image [class*=col-]:nth-child(2n+2) .activity-item {
+        border-right: none;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .activity-bg-image {
+        padding-top: 50px;
+        margin-bottom: 50px;
+    }
+}
+
+.activity-title {
+    color: black;
+    font-style: none;
+    text-decoration: none; /* Add this line */
+}
