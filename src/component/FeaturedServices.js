@@ -1,4 +1,4 @@
-// src/components/FeaturedServices.js - Updated Version
+// src/components/FeaturedServices.js
 "use client";
 
 import { useState, useEffect } from "react";
@@ -14,6 +14,7 @@ import {
   List,
   Heart,
   Share2,
+  Palmtree,
 } from "lucide-react";
 
 export default function FeaturedServices() {
@@ -23,6 +24,7 @@ export default function FeaturedServices() {
     package: null,
     rental: null,
     hotel: null,
+    resort: null,
   });
   const [loading, setLoading] = useState(true);
 
@@ -34,20 +36,14 @@ export default function FeaturedServices() {
     try {
       setLoading(true);
 
-      // Use the new featured API endpoint
       const response = await fetch("/api/featured");
-
+      if (!response.ok) throw new Error("Network response was not ok");
       const data = await response.json();
 
-      if (!response.ok) throw new Error("Network response was not ok");
       if (data.success && data.data) {
         setFeaturedItems(data.data);
       } else {
         console.error("Featured API returned:", data);
-      }
-
-      if (data.success) {
-        setFeaturedItems(data.data);
       }
     } catch (error) {
       console.error("Error fetching featured items:", error);
@@ -67,7 +63,9 @@ export default function FeaturedServices() {
             price: `₹${item.price}`,
             priceUnit: item.priceType || "per service",
             description: item.description,
-            image: item.images?.[0] || "https://images.unsplash.com/photo-1707344088547-3cf7cea5ca49?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxzZWFyY2h8MXx8dHJhdmVsfGVufDB8fDB8fHww",
+            image:
+              item.images?.[0] ||
+              "https://images.unsplash.com/photo-1707344088547-3cf7cea5ca49?w=600&auto=format&fit=crop&q=60",
             badges: [
               {
                 text:
@@ -92,7 +90,9 @@ export default function FeaturedServices() {
             price: `₹${item.price?.adult || item.price || 0}`,
             priceUnit: "per person",
             description: item.description,
-            image: item.images?.[0] || "https://images.unsplash.com/photo-1707344088547-3cf7cea5ca49?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxzZWFyY2h8MXx8dHJhdmVsfGVufDB8fDB8fHww",
+            image:
+              item.images?.[0] ||
+              "https://images.unsplash.com/photo-1707344088547-3cf7cea5ca49?w=600&auto=format&fit=crop&q=60",
             badges: [
               {
                 text: `${item.duration?.days || 1}D/${
@@ -134,7 +134,9 @@ export default function FeaturedServices() {
             }`,
             priceUnit: "per person",
             description: item.description,
-            image: item.images?.[0] || "https://images.unsplash.com/photo-1707344088547-3cf7cea5ca49?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxzZWFyY2h8MXx8dHJhdmVsfGVufDB8fDB8fHww",
+            image:
+              item.images?.[0] ||
+              "https://images.unsplash.com/photo-1707344088547-3cf7cea5ca49?w=600&auto=format&fit=crop&q=60",
             badges: [
               {
                 text: `${item.duration?.days || 1}D/${
@@ -160,7 +162,10 @@ export default function FeaturedServices() {
                   item.duration?.nights || 0
                 }N`,
               },
-              { icon: Package, text: item.accommodation?.type || "Hotel" },
+              {
+                icon: Package,
+                text: item.accommodation?.type || "Hotel",
+              },
             ],
             rating: item.rating || 4.5,
             reviews: item.reviewCount || 75,
@@ -186,7 +191,9 @@ export default function FeaturedServices() {
             } seater ${item.fuelType || "petrol"} ${
               item.transmission || "manual"
             }`.trim(),
-            image: item.images?.[0] || "https://images.unsplash.com/photo-1707344088547-3cf7cea5ca49?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxzZWFyY2h8MXx8dHJhdmVsfGVufDB8fDB8fHww",
+            image:
+              item.images?.[0] ||
+              "https://images.unsplash.com/photo-1707344088547-3cf7cea5ca49?w=600&auto=format&fit=crop&q=60",
             badges: [
               {
                 text: item.category?.toUpperCase() || "CAR",
@@ -215,7 +222,9 @@ export default function FeaturedServices() {
             price: `₹${item.roomTypes?.[0]?.price || 1500}`,
             priceUnit: "per night",
             description: item.description,
-            image: item.images?.[0] || "https://images.unsplash.com/photo-1707344088547-3cf7cea5ca49?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxzZWFyY2h8MXx8dHJhdmVsfGVufDB8fDB8fHww",
+            image:
+              item.images?.[0] ||
+              "https://images.unsplash.com/photo-1707344088547-3cf7cea5ca49?w=600&auto=format&fit=crop&q=60",
             badges: [
               { text: `${item.starRating || 3} STAR`, bg: "bg-red-500" },
               {
@@ -226,8 +235,8 @@ export default function FeaturedServices() {
             details: [
               {
                 icon: MapPin,
-                text: `${item.location?.city || "India"}, ${
-                  item.location?.state || "India"
+                text: `${item.location?.city || "City"}, ${
+                  item.location?.state || "State"
                 }`,
               },
               { icon: Hotel, text: item.hotelType || "Hotel" },
@@ -236,6 +245,40 @@ export default function FeaturedServices() {
             rating: item.rating || 4.5,
             reviews: item.reviewCount || 80,
             href: `/hotel/${item._id}`,
+          };
+
+        case "resort":
+          return {
+            title: item.name,
+            price: `₹${
+              item.accommodation?.[0]?.price ||
+              Math.min(...(item.accommodation?.map((a) => a.price) || [2000]))
+            }`,
+            priceUnit: "per night",
+            description: item.description,
+            image:
+              item.images?.[0] ||
+              "https://images.unsplash.com/photo-1707344088547-3cf7cea5ca49?w=600&auto=format&fit=crop&q=60",
+            badges: [
+              { text: `${item.starRating || 3} STAR`, bg: "bg-teal-500" },
+              {
+                text: item.resortType?.toUpperCase() || "RESORT",
+                bg: "bg-transparent border border-white",
+              },
+            ],
+            details: [
+              {
+                icon: MapPin,
+                text: `${item.location?.city || "City"}, ${
+                  item.location?.state || "State"
+                }`,
+              },
+              { icon: Palmtree, text: item.resortType || "Resort" },
+              { icon: Star, text: `${item.starRating || 3} Star Resort` },
+            ],
+            rating: item.rating || 4.5,
+            reviews: item.reviewCount || 90,
+            href: `/resort/${item._id}`,
           };
 
         default:
@@ -248,48 +291,44 @@ export default function FeaturedServices() {
 
     return (
       <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-        {/* Image Container */}
+        {/* Image */}
         <div className="relative h-64 overflow-hidden">
           <img
             src={cardData.image}
             alt={cardData.title}
             className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
             onError={(e) => {
-              e.target.src = "https://images.unsplash.com/photo-1707344088547-3cf7cea5ca49?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxzZWFyY2h8MXx8dHJhdmVsfGVufDB8fDB8fHww";
+              e.target.src =
+                "https://images.unsplash.com/photo-1707344088547-3cf7cea5ca49?w=600";
             }}
           />
-
-          {/* Price Badge */}
+          {/* Price */}
           <div className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full font-semibold shadow-lg">
             {cardData.price} / {cardData.priceUnit}
           </div>
-
-          {/* Action Buttons */}
+          {/* Buttons */}
           <div className="absolute top-4 right-4 flex gap-2">
-            <button className="bg-white bg-opacity-90 hover:bg-opacity-100 p-2 rounded-full shadow-lg transition-all">
+            <button className="bg-white bg-opacity-90 p-2 rounded-full shadow-lg hover:bg-opacity-100">
               <Heart className="h-5 w-5 text-gray-600" />
             </button>
-            <button className="bg-white bg-opacity-90 hover:bg-opacity-100 p-2 rounded-full shadow-lg transition-all">
+            <button className="bg-white bg-opacity-90 p-2 rounded-full shadow-lg hover:bg-opacity-100">
               <Share2 className="h-5 w-5 text-gray-600" />
             </button>
           </div>
-
-          {/* Bottom Badges */}
+          {/* Badges */}
           <div className="absolute bottom-4 left-4 flex flex-wrap gap-2">
-            {cardData.badges.map((badge, index) => (
+            {cardData.badges.map((b, i) => (
               <span
-                key={index}
-                className={`${badge.bg} text-white text-xs px-2 py-1 rounded font-medium`}
+                key={i}
+                className={`${b.bg} text-white text-xs px-2 py-1 rounded font-medium`}
               >
-                {badge.text}
+                {b.text}
               </span>
             ))}
           </div>
         </div>
-
         {/* Content */}
         <div className="p-6">
-          {/* Title and Rating */}
           <div className="flex justify-between items-start mb-3">
             <h3 className="text-xl font-bold text-gray-900 line-clamp-1 flex-1">
               {cardData.title}
@@ -301,31 +340,23 @@ export default function FeaturedServices() {
               </span>
             </div>
           </div>
-
-          {/* Description */}
           <p className="text-gray-600 text-sm mb-4 line-clamp-2">
             {cardData.description}
           </p>
-
-          {/* Details */}
           <div className="space-y-2 mb-4">
-            {cardData.details.map((detail, index) => (
+            {cardData.details.map((d, i) => (
               <div
-                key={index}
+                key={i}
                 className="flex items-center gap-2 text-sm text-gray-600"
               >
-                <detail.icon className="h-4 w-4" />
-                <span>{detail.text}</span>
+                <d.icon className="h-4 w-4" />
+                <span>{d.text}</span>
               </div>
             ))}
           </div>
-
-          {/* Reviews */}
           <div className="text-xs text-gray-500 mb-4">
             ({cardData.reviews} reviews)
           </div>
-
-          {/* Action Buttons */}
           <div className="flex gap-3">
             <Link
               href={cardData.href}
@@ -333,12 +364,10 @@ export default function FeaturedServices() {
             >
               Book Now →
             </Link>
-            <button className="bg-gray-100 hover:bg-gray-200 text-gray-600 px-4 py-3 rounded-lg font-medium transition-colors">
+            <button className="bg-gray-100 hover:bg-gray-200 text-gray-600 px-4 py-3 rounded-lg font-medium">
               Wish List ♡
             </button>
           </div>
-
-          {/* Additional Info Icons */}
           <div className="flex justify-center items-center gap-4 mt-4 pt-4 border-t border-gray-100">
             <div className="flex items-center gap-1 text-xs text-gray-500">
               <span>✈</span>
@@ -361,7 +390,7 @@ export default function FeaturedServices() {
   if (loading) {
     return (
       <div className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <div className="flex justify-center items-center h-64">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
           </div>
@@ -370,15 +399,14 @@ export default function FeaturedServices() {
     );
   }
 
-  // Filter out null items
   const validItems = Object.entries(featuredItems).filter(
-    ([key, value]) => value !== null
+    ([, v]) => v !== null
   );
 
   if (validItems.length === 0) {
     return (
       <div className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <div className="text-center">
             <h3 className="text-xl font-semibold text-gray-500">
               No featured services available
@@ -394,8 +422,7 @@ export default function FeaturedServices() {
 
   return (
     <section className="py-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+      <div className="max-w-7xl mx-auto px-4 lg:px-8">
         <div className="text-center mb-12">
           <p className="text-orange-500 font-semibold text-lg mb-2">
             WHAT WE PROVIDE
@@ -409,14 +436,12 @@ export default function FeaturedServices() {
           </p>
         </div>
 
-        {/* Featured Items Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {validItems.map(([type, item]) => (
             <ServiceCard key={type} item={item} type={type} />
           ))}
         </div>
 
-        {/* View All Button */}
         <div className="text-center mt-12">
           <Link
             href="/all-services"

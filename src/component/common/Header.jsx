@@ -5,11 +5,14 @@ import { useState } from "react";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { Menu, X, User, LogOut, ChevronDown } from "lucide-react";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const { data: session, status } = useSession();
+  const pathname = usePathname();
 
   // Don't render Header for admins - they will use Sidebar instead
   if (status === "authenticated" && session?.user?.role === "admin") {
@@ -26,6 +29,13 @@ export default function Header() {
     setIsUserMenuOpen(false);
   };
 
+  const nav__links = [
+    { path: "/offers", display: "Offers" },
+    { path: "/gallery", display: "Gallery" },
+    { path: "/about", display: "About" },
+    { path: "/contact", display: "Contact" },
+  ];
+
   return (
     <nav className="bg-[#a7d6f0] shadow-lg sticky top-0 z-50 border-b border-gray-200 py-3">
       <div className="max-w-7xl mx-auto ">
@@ -37,21 +47,30 @@ export default function Header() {
             onClick={closeMenus}
           >
             <div className="flex flex-col">
-              <span className=" font-bold text-gray-900 leading-tight">
-                Renuka World Travel
-              </span>
+              <Image
+                src="/logoHeader.webp"
+                width={150}
+                height={100}
+                alt="logoHeader.webp"
+              />
             </div>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
-            <Link
-              href="/services"
-              className="px-4 py-2 mx-2 bg-green-600 text-white hover:bg-green-700 rounded-lg transition-all duration-200 font-medium shadow-sm"
-            >
-              View Services
-            </Link>
-
+            <nav className="hidden lg:flex items-center gap-8">
+              {nav__links.map((link) => (
+                <Link
+                  key={link.path}
+                  href={link.path}
+                  className={`text-gray-600 hover:text-primary transition-colors ${
+                    pathname === link.path ? "text-primary font-semibold" : ""
+                  }`}
+                >
+                  {link.display}
+                </Link>
+              ))}
+            </nav>
             {/* Authentication Section */}
             {status === "authenticated" ? (
               <div className="flex items-center space-x-3 ml-4 pl-4 border-l border-gray-200">
@@ -134,14 +153,6 @@ export default function Header() {
         {isMenuOpen && (
           <div className="md:hidden border-t border-gray-200 bg-white min-h-screen min-w-full px-4 sm:px-6 lg:px-8">
             <div className="px-2 pt-4 pb-6 ">
-              <Link
-                href="/services"
-                className="block px-4 py-3 text-green-600 hover:text-green-700 hover:bg-green-50 rounded-lg transition-all font-medium border border-green-200"
-                onClick={closeMenus}
-              >
-                View Services
-              </Link>
-
               {/* Mobile Authentication */}
               {status === "authenticated" ? (
                 <div className="pt-4 mt-4 border-t border-gray-200 space-y-2">
