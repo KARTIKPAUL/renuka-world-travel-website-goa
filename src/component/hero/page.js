@@ -324,9 +324,9 @@ const Hero = () => {
                       <h3 className="text-xl font-bold text-gray-800">
                         Kerala
                       </h3>
-                      <button className="text-2xl text-rose-500 transition-colors hover:text-rose-600">
+                      {/* <button className="text-2xl text-rose-500 transition-colors hover:text-rose-600">
                         ♡
-                      </button>
+                      </button> */}
                     </div>
 
                     {/* Trip details */}

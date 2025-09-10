@@ -26,7 +26,14 @@ import {
   IndianRupee,
 } from "lucide-react";
 
-const COLORS = ["#4299E1", "#48BB78", "#9F7AEA", "#ED8936", "#F56565"];
+const COLORS = [
+  "#4299E1",
+  "#48BB78",
+  "#9F7AEA",
+  "#ED8936",
+  "#F56565",
+  "#38B2AC",
+];
 
 export default function Dashboard() {
   const { data: session, status } = useSession();
@@ -38,6 +45,7 @@ export default function Dashboard() {
     totalPackages: 0,
     totalRentals: 0,
     totalHotels: 0,
+    totalResorts: 0,
     totalUsers: 0,
   });
   const [recentItems, setRecentItems] = useState({
@@ -46,6 +54,7 @@ export default function Dashboard() {
     packages: [],
     rentals: [],
     hotels: [],
+    resorts: [],
   });
 
   const pieData = [
@@ -54,6 +63,7 @@ export default function Dashboard() {
     { name: "Packages", value: stats.totalPackages },
     { name: "Rentals", value: stats.totalRentals },
     { name: "Hotels", value: stats.totalHotels },
+    { name: "Resorts", value: stats.totalResorts },
   ];
 
   // Redirect if not admin
@@ -79,22 +89,31 @@ export default function Dashboard() {
       setLoading(true);
 
       // Fetch stats from all endpoints
-      const [servicesRes, toursRes, packagesRes, rentalsRes, hotelsRes] =
-        await Promise.all([
-          fetch("/api/services"),
-          fetch("/api/tours"),
-          fetch("/api/packages"),
-          fetch("/api/rental-services"),
-          fetch("/api/hotels"),
-        ]);
-
-      const [services, tours, packages, rentals, hotels] = await Promise.all([
-        servicesRes.json(),
-        toursRes.json(),
-        packagesRes.json(),
-        rentalsRes.json(),
-        hotelsRes.json(),
+      const [
+        servicesRes,
+        toursRes,
+        packagesRes,
+        rentalsRes,
+        hotelsRes,
+        resortsRes,
+      ] = await Promise.all([
+        fetch("/api/services"),
+        fetch("/api/tours"),
+        fetch("/api/packages"),
+        fetch("/api/rental-services"),
+        fetch("/api/hotels"),
+        fetch("/api/resorts"),
       ]);
+
+      const [services, tours, packages, rentals, hotels, resorts] =
+        await Promise.all([
+          servicesRes.json(),
+          toursRes.json(),
+          packagesRes.json(),
+          rentalsRes.json(),
+          hotelsRes.json(),
+          resortsRes.json(),
+        ]);
 
       // Update stats
       setStats({
@@ -103,6 +122,7 @@ export default function Dashboard() {
         totalPackages: packages.data?.length || 0,
         totalRentals: rentals.data?.length || 0,
         totalHotels: hotels.data?.length || 0,
+        totalResorts: resorts.data?.length || 0,
         totalUsers: 0, // You can add users endpoint later
       });
 
@@ -113,6 +133,7 @@ export default function Dashboard() {
         packages: packages.data?.slice(0, 5) || [],
         rentals: rentals.data?.slice(0, 5) || [],
         hotels: hotels.data?.slice(0, 5) || [],
+        resorts: resorts.data?.slice(0, 5) || [],
       });
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
@@ -238,6 +259,13 @@ export default function Dashboard() {
               icon={Hotel}
               color="border-l-red-500"
               href="/manage-hotels"
+            />
+            <StatCard
+              title="Total Resorts"
+              value={stats.totalResorts}
+              icon={Hotel}
+              color="border-l-teal-500"
+              href="/manage-resorts"
             />
           </div>
 

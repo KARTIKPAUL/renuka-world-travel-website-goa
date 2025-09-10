@@ -123,6 +123,14 @@ const Sidebar = () => {
 
           <span className="text-sm font-medium">Add Hotel</span>
         </Link>
+        <Link
+          href="/add-resort"
+          className={`flex items-center gap-3 p-3 rounded-lg  transition-colors group relative`}
+        >
+          <Hotel size={20} className="flex-shrink-0" />
+
+          <span className="text-sm font-medium">Add Resort</span>
+        </Link>
 
         <Link
           href="/profile"
