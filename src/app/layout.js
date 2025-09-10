@@ -9,6 +9,7 @@ import AuthProvider from "../../providers/AuthProvider";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { createContext, useContext } from "react";
+import { Toaster } from "react-hot-toast";
 
 // Create context for sidebar state
 const SidebarContext = createContext();

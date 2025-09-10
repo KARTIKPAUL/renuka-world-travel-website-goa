@@ -73,6 +73,7 @@ export default function AddPackagePage() {
       }));
     }
   };
+  
 
   const handleArrayChange = (index, value, field) => {
     const newArray = [...formData[field]];
@@ -101,6 +102,8 @@ export default function AddPackagePage() {
   };
 
   const handleSubmit = async (e) => {
+      toast.success("Form submitted successfully 🎉");
+    
     e.preventDefault();
     setLoading(true);
 
@@ -138,6 +141,7 @@ export default function AddPackagePage() {
         },
         body: JSON.stringify(cleanData),
       });
+      
 
       const data = await response.json();
 
