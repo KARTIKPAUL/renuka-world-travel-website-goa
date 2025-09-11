@@ -212,7 +212,7 @@ export default function ManageToursPage() {
           </button>
 
           <button
-            onClick={() => router.push(`/tour/${tour._id}`)}
+            onClick={() => router.push(`/manage-tours/${tour._id}`)}
             className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-lg text-sm transition-colors"
           >
             <Eye className="h-4 w-4" />

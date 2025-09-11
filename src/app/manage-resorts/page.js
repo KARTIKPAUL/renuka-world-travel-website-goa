@@ -252,7 +252,7 @@ export default function ManageResortsPage() {
           </button>
 
           <button
-            onClick={() => router.push(`/resort/${resort._id}`)}
+            onClick={() => router.push(`/manage-resorts/${resort._id}`)}
             className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-lg text-sm transition-colors"
           >
             <Eye className="h-4 w-4" />

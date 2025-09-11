@@ -60,20 +60,20 @@ const Hero = () => {
               </p>
               <div className="flex items-center gap-4">
                 <Link
-                  href="/your-link-1"
+                  href="/offers"
                   className="flex items-center gap-2 bg-[#f1a501] px-6 py-4 text-white rounded-full hover:bg-[#e29400] transition-colors"
                 >
                   <span>Find Out More</span>
                   <FaArrowRight className="text-sm" />
                 </Link>
 
-                <Link
+                {/* <Link
                   href="/your-link-2"
                   className="flex items-center gap-2 bg-[#df6951] px-6 py-4 text-white rounded-full hover:bg-[#ce5840] transition-colors"
                 >
                   <span className="">Book Now</span>
                   <FaArrowRight className="text-sm" />
-                </Link>
+                </Link> */}
               </div>
             </div>
             <div className="relative hidden h-[764px] w-[783px] pt-24 lg:block">

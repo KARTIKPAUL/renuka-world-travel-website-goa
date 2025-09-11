@@ -177,21 +177,15 @@ export default function ManageServicesPage() {
 
         {/* Action Buttons */}
         <div className="flex gap-2">
-          <button
-            onClick={() => router.push(`/edit-service/${service._id}`)}
-            className="flex-1 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-2"
-          >
-            <Edit className="h-4 w-4" />
+          <button onClick={() => router.push(`/edit-service/${service._id}`)}>
             Manage
           </button>
 
           <button
-            onClick={() => router.push(`/service/${service._id}`)}
-            className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-lg text-sm transition-colors"
+            onClick={() => router.push(`/manage-services/${service._id}`)}
           >
-            <Eye className="h-4 w-4" />
+            <Eye />
           </button>
-
           <button
             onClick={() => handleDelete(service._id)}
             className="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-lg text-sm transition-colors"

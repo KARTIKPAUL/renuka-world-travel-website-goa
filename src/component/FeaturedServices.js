@@ -354,9 +354,9 @@ export default function FeaturedServices() {
               </div>
             ))}
           </div>
-          <div className="text-xs text-gray-500 mb-4">
+          {/* <div className="text-xs text-gray-500 mb-4">
             ({cardData.reviews} reviews)
-          </div>
+          </div> */}
           <div className="flex gap-3">
             <Link
               href={cardData.href}
@@ -368,7 +368,7 @@ export default function FeaturedServices() {
               Wish List ♡
             </button>
           </div>
-          <div className="flex justify-center items-center gap-4 mt-4 pt-4 border-t border-gray-100">
+          {/* <div className="flex justify-center items-center gap-4 mt-4 pt-4 border-t border-gray-100">
             <div className="flex items-center gap-1 text-xs text-gray-500">
               <span>✈</span>
               <span>Flight</span>
@@ -381,7 +381,7 @@ export default function FeaturedServices() {
               <span>🚌</span>
               <span>Transport</span>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     );
@@ -442,7 +442,7 @@ export default function FeaturedServices() {
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        {/* <div className="text-center mt-12">
           <Link
             href="/all-services"
             className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
@@ -450,7 +450,7 @@ export default function FeaturedServices() {
             View All Services
             <span>→</span>
           </Link>
-        </div>
+        </div> */}
       </div>
     </section>
   );

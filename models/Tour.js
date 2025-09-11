@@ -139,12 +139,12 @@ const TourSchema = new mongoose.Schema(
       max: 5,
       default: 0,
     },
-    reviews: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Review",
-      },
-    ],
+    // reviews: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Review",
+    //   },
+    // ],
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
