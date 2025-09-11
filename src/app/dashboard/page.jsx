@@ -189,12 +189,12 @@ export default function Dashboard() {
         <div>
           <p className="text-sm font-medium text-white/90">{title}</p>
           <p className="text-3xl font-bold text-white">{value}</p>
-          {trend && (
+          {/* {trend && (
             <p className="text-xs text-white/80 mt-1 flex items-center gap-1">
               <TrendingUp className="h-3 w-3" />
               {trend}
             </p>
-          )}
+          )} */}
         </div>
         <div className="p-3 rounded-full bg-white/20 backdrop-blur-sm">
           <Icon className="h-8 w-8 text-white" />
